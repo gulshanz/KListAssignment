@@ -1,11 +1,14 @@
 package taksande.kewaldas.gulshan.klistassignment.ui
 
+import android.widget.Toast
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import taksande.kewaldas.gulshan.klistassignment.klist.*
 
 @Composable
 fun KListDemo() {
+    val context = LocalContext.current
     val gainers = listOf(
         Coin("Bitcoin", "$67,420"),
         Coin("Ethereum", "$3,120"),
@@ -24,22 +27,18 @@ fun KListDemo() {
     )
 
 
-    KList.create()
-        .padding(16.dp)
-        .section("Top Gainers", gainers, onItemClick = {
-            println("Clicked on Gainer: ${it.name}")
+    KList.create().padding(16.dp).section("Top Gainers", gainers, onItemClick = {
+            Toast.makeText(context, "Clicked on ${it.name} Parent", Toast.LENGTH_SHORT).show()
         }) {
             KListItem(it) {
-                println("Clicked on ${it.name}")
+                Toast.makeText(context, "Clicked on ${it.name}", Toast.LENGTH_SHORT).show()
             }
 
-        }
-        .section("Top Losers", losers, onItemClick = {
-            println("Clicked on Loser: ${it.name}")
+        }.section("Top Losers", losers, onItemClick = {
+            Toast.makeText(context, "Clicked on ${it.name} Parent", Toast.LENGTH_SHORT).show()
         }) {
             KListItem(it) {
-                println("Clicked on ${it.name}")
+                Toast.makeText(context, "Clicked on ${it.name}", Toast.LENGTH_SHORT).show()
             }
-        }
-        .Render()
+        }.Render()
 }
